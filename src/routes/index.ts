@@ -1,6 +1,6 @@
 import { Router } from "express";
 const router = Router();
-import {createPhoto, getPhotos, getPhoto, deletePhoto, updatePhoto} from "../controllers/photo.controller"; 
+import {createPhoto, getPhotos, getPhoto, deletePhoto, updatePhoto} from "../controllers/photo.controller";
 import multer from "../libs/multer";
 
 

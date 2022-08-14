@@ -5,7 +5,9 @@ import fs from "fs-extra";
 
 export async function getPhotos(req: Request, res: Response): Promise<Response> {
    const photos = await Photo.find();
-   return res.json(photos);
+   return res.send({
+      photos
+   });
 }
 
 export async function getPhoto(req: Request, res: Response): Promise<Response> {
@@ -15,6 +17,11 @@ export async function getPhoto(req: Request, res: Response): Promise<Response> {
 
 export async function createPhoto(req: Request, res: Response): Promise<Response> {
   const { title, description } = req.body;
+  if(!req.file?.originalname.match(/\.(jpg|jpeg|png)$/)){
+    return res.status(400).send({
+      message: 'File type is not valid'
+    });
+  }else{
   const newPhoto = {
     title,
     description,
@@ -26,6 +33,7 @@ export async function createPhoto(req: Request, res: Response): Promise<Response
   
 
   return res.json({ message: "Create photo success", photo });
+}
 }
 
 
